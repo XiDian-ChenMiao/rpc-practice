@@ -49,12 +49,52 @@ RPC 服务端接收器 RpcAcceptor 接收客户端的调用请求，同样使用
 **RpcChannel**
 数据传输通道。
 
-## RPC知识储备
+## 知识储备
 
-ICE（Internet Communications Engine）是ZeroC提供的一款高性能的中间件，基于ICE可以实现电信级的解决方案。基于ICE的数据层可以在未来方便的进行扩展，ICE支持分布式的部署管理，消息中间件以及网格计算。
+### SOA
+
+SOA是面向服务的软件架构（Service Oriented Architecture），是一种计算机软件的设计模式，主要应用于不同应用组件中某种协议来互相操作，例如典型的通过网络协议。因此SOA是独立于任何厂商、产品与技术的。SOA作为一种架构依赖于服务的方向，它的基本设计原理是：服务提供了一个简单的接口，抽象了底层的复杂性，然后用户可以访问独立的服务，而不需要去了解底层平台的实现。其实现包括：
+
+- SOAP, RPC
+- REST
+- DCOM
+- CORBA
+- OPC-UA
+- Web Services
+- DDS
+- Java RMI
+
+因此，REST、SOAP、RPC和DCOM等都是SOA的一种实现而已。
+
+### ICE
+
+ICE（Internet Communications Engine）是ZeroC提供的一款高性能的中间件，基于ICE可以实现电信级的解决方案。基于ICE的数据层可以在未来方便的进行扩展，ICE支持分布式的部署管理，消息中间件以及网格计算。其产生来源于.NET、CORBA和Web Service这些中间件的不足，它可以支持不同的系统，如Windows、Linux等，也可以支持多种开发语言使用，如C++、C、Java、Python等，服务器可以是上面提到的任何一种语言实现的，客户端也可以根据自己的实际情况选择不同的语言去实现，如服务器端采用C语言实现，而客户端采用Java语言实现，底层的通信逻辑通过ICE的封装实现，我们只关系业务逻辑。
+
+### SOAP
 
 SOAP（Simple Object Access Protocol）简单对象访问协议，是一个通信协议，SOAP在HTTP协议的基础上，把编写成的XML的Request参数，放在Http请求体上提交到Web Server处理完成后，结果也写成XML作为Response送回客户端，为了使用户端Web Service可以相互对应，可以使用WSDL作为这种通信方式的描述文件，利用WSDL工具可以自动生成WS和用户端的框架文件，SOAP具备把复杂对象序列化捆绑到XML的能力。
 SOAP的前身是RPC，这个协议安全性不是很好，多数防火墙都会阻挡RPC的通信包，而SOAP则使用HTTP协议作为基本的协议，使用端口80使得SOAP可以透过防火墙，完成RPC的功能。
+
+### Web Service
+
+Web Service是建立在可互操作的分布式应用程序的新平台。其是一种标准，它可以通过SOAP和REST的方式来实现，传统的SOAP-WebService使用了SOAP协议（基于XML封装）等。如果使用Restful-WebService的话，则不需要SOAP与之相关的协议，而是通过最简单的HTTP协议传输数据（包括XML和JSON），既简化了设计也减少了网络传输量。其有几个相关概念：
+
+**WSDL**：网络服务描述语言是Web Service的描述语言，它包含了一系列的描述某个Web Service的定义。
+**UDDI**：是一种目录服务，企业可以使用它对Web Service进行注册和搜索。
+
+### REST与SOAP
+
+REST（Representational State Transfer）是一种轻量级的Web Service架构，可以完全通过HTTP协议实现。其实现和操作比SOAP和XML-RPC更为简洁，还可以利用缓存Cache来提高响应速度，性能、效率以及易用性上面都优于SOAP协议。REST架构对资源的操作包括获取、创建、修改和删除的操作正好对应HTTP协议的GET、POST、PUT和DELETE方法。
+
+**REST、SOAP和XML-RPC三种方案的比较**
+
+XML-RPC已慢慢的被SOAP所取代，现在很少采用。从以下几点比较：
+
+- 成熟度：SOAP在成熟度上优于REST；
+- 效率和易用性：REST更胜一筹；
+- 安全性：SOAP安全性高于REST，因为REST更关注的是效率和性能问题；
+
+总体上，因为REST模式的Web服务与复杂的SOAP和XML-RPC对比来讲具有更明显的简洁，越来越多的Web服务开始采用REST风格设计和实现。REST对于资源型接口来讲很合适，同时特别适合对于效率要求很高，但是对于安全要求不高的场景。而SOAP的成熟性可以给需要提供更多开发语言的，对于安全性要求较高的接口设计带来便利。
 
 ## RPC应用
 
@@ -66,10 +106,4 @@ XML-RPC的定义是工作在互联网上的远程过程调用协议，它可以�
 - XML-RPC调用服务的方式要求直接指定对象和方法，称不上完整的面向服务的体系；
 - XML-RPC服务器端提供的服务实际上是特定对象的某个方法，限制了服务器端的开发。
 
-**数据格式**
-
-
 ### JSON-RPC
-
-
-
