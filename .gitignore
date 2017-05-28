@@ -61,7 +61,14 @@ $RECYCLE.BIN/
 # Intellij IDE
 *.iml
 target/
+bin/
+.idea/
+.lib/
 
 # Eclipse IDE
 *.classpath
 *.project
+*.settings
+
+# Virtual Code
+.vscode
