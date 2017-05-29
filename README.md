@@ -98,6 +98,8 @@ XML-RPC已慢慢的被SOAP所取代，现在很少采用。从以下几点比较
 
 ## RPC应用
 
+所有模块中，凡是出现9000端口皆为依赖配置中添加Jetty插件并指定其开启端口为9000。若与用户本地端口存在冲突，可到相应模块中的 `pom.xml` 中自行更改。
+
 ### XML-RPC
 
 XML-RPC的定义是工作在互联网上的远程过程调用协议，它可以允许软件运行在分布式的系统之上，通过互联网进行软件程序之间的调用，其传输协议是HTTP，传送数据编码格式是XML，由于是通过HTTP传输数据，因此基于XML-RPC的软件不受操作环境、编程语言等限制，由于是通过HTTP协议传输，因此可以通过防火墙的限制，具有简单易用等特点。XML-RPC只是一个协议，Apache的XML-RPC是开源的一个实现。其缺点如下：
@@ -138,3 +140,23 @@ XML-RPC的定义是工作在互联网上的远程过程调用协议，它可以�
 访问名称：`http://localhost:9000/rest-rpc/rest/user/name/daqinzhidi`
 
 访问年龄：`http://localhost:9000/rest-rpc/rest/user/age/24`
+
+### SOAP-RPC
+
+**安装与运行**
+
+    mvn clean install
+    
+拷贝 [`soap.war`](./soap-rpc/src/main/resources/soap.war)，放入`Tomcat`中的`webapps`目录下，通过本地启动`Tomcat`，并且在地址栏中输入 `http://localhost:8090/soap/admin` 便可进入`SOAP`服务的主页面（其中端口`8090`为作者的`Tomcat`服务端口，如有不一致，用户可自行更改访问端口），在此需要点击`Deploy`菜单来进行`SOAP`服务的发布页面，并如下图进行简单的服务配置：
+
+![部署图](./soap-rpc/src/main/resources/images/deploy.png)
+
+部署成功之后，然后通过如下命令开启本地服务器：
+
+    mvn jetty:run
+    
+在浏览器中输入访问地址：`http://localhost:9000/soap-rpc/echo`，最终页面如果出现 `SOAP测试客户端，接收到响应为：大秦之帝`，即完成了一次`SOAP`远程服务调用的过程。如果用户的`Tomcat`端口不是`8090`，需要修改配置文件[`service-config.properties`](./soap-rpc/src/main/resources/service-config.properties)中的`endpoint`所对应的端口号。
+
+**出现问题**
+
+在此需要着重说明一个问题，作者直接通过在地址栏输入访问地址后，未能出现预期的结果，检查时发现出现错误：`SOAP-ENV:Server.BadTargetObjectURI`，最终解决方案是将由`mvn clean install`命令编译后的字节码文件放入`Tomcat`的 `webapps`目录下的 `soap\WEB-INF\classes\`中，必须带完整包路径，如`soap\WEB-INF\classes\com\xidian\mti\rpc\service\impl\EchoServiceImpl.class`，然后重新启动Tomcat，在浏览器输入访问地址便可出现预期结果。
