@@ -49,7 +49,7 @@ RPC 服务端接收器 RpcAcceptor 接收客户端的调用请求，同样使用
 **RpcChannel**
 数据传输通道。
 
-## 知识储备
+## 相关知识储备
 
 ### SOA
 
@@ -106,4 +106,35 @@ XML-RPC的定义是工作在互联网上的远程过程调用协议，它可以�
 - XML-RPC调用服务的方式要求直接指定对象和方法，称不上完整的面向服务的体系；
 - XML-RPC服务器端提供的服务实际上是特定对象的某个方法，限制了服务器端的开发。
 
+**安装和运行**
+
+    mvn clean install
+    mvn jetty:run
+
+**测试用例中访问**
+
+测试用例需要访问的地址为：`http://192.168.2.201:9000/xml-rpc/echo`，端口修改需要更改[`pom.xml`](./xml-rpc/pom.xml)中Jetty插件的端口，访问地址的配置文件为：[`service-config.properties`](./xml-rpc/src/main/resources/service-config.properties)。
+
 ### JSON-RPC
+
+**安装和运行**
+
+    mvn clean install
+    mvn jetty:run
+
+**测试用例中访问**
+
+测试用例需要访问的地址为：`http://192.168.2.201:9000/json-rpc/echo`，端口修改需要更改[`pom.xml`](./json-rpc/pom.xml)中Jetty插件的端口，访问地址的配置文件为：[`service-config.properties`](./json-rpc/src/main/resources/service-config.properties)。
+
+### REST-RPC
+
+**安装和运行**
+
+    mvn clean install
+    mvn jetty:run
+
+**访问**
+    
+访问名称：`http://localhost:9000/rest-rpc/rest/user/name/daqinzhidi`
+
+访问年龄：`http://localhost:9000/rest-rpc/rest/user/age/24`
