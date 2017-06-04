@@ -19,9 +19,10 @@ public class JsonRpcServicesTest {
         properties.load(JsonRpcServicesTest.class.getClassLoader().getResourceAsStream("service-config.properties"));
         JsonRpcHttpClient client = new JsonRpcHttpClient(new URL(properties.getProperty("echo")));
         Map<String, String> headers = new HashMap<String, String>();
+        headers.put("UserKey", "daqinzhidi");
         client.setHeaders(headers);
-        String[] params = new String[]{"Hello, Server!"};
-        String response = client.invoke("echo", params, String.class);
+        String[] send = new String[] {"Hello, Server!"};
+        String response = client.invoke("echo", send, String.class);
         System.out.println("客户端收到：" + response + "，收到时间为：" + System.currentTimeMillis());
     }
 }
