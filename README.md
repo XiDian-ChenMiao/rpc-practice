@@ -115,7 +115,7 @@ XML-RPC的定义是工作在互联网上的远程过程调用协议，它可以�
 
 **测试用例中访问**
 
-测试用例需要访问的地址为：`http://192.168.2.201:9000/xml-rpc/echo`，端口修改需要更改[`pom.xml`](./xml-rpc/pom.xml)中Jetty插件的端口，访问地址的配置文件为：[`service-config.properties`](./xml-rpc/src/main/resources/service-config.properties)。
+测试用例需要访问的地址为：`http://localhost:9000/xml-rpc/echo`，端口修改需要更改[`pom.xml`](./xml-rpc/pom.xml)中Jetty插件的端口，访问地址的配置文件为：[`service-config.properties`](./xml-rpc/src/main/resources/service-config.properties)。
 
 ### JSON-RPC
 
@@ -126,7 +126,7 @@ XML-RPC的定义是工作在互联网上的远程过程调用协议，它可以�
 
 **测试用例中访问**
 
-测试用例需要访问的地址为：`http://192.168.2.201:9000/json-rpc/echo`，端口修改需要更改[`pom.xml`](./json-rpc/pom.xml)中Jetty插件的端口，访问地址的配置文件为：[`service-config.properties`](./json-rpc/src/main/resources/service-config.properties)。
+测试用例需要访问的地址为：`http://localhost:9000/json-rpc/echo`，端口修改需要更改[`pom.xml`](./json-rpc/pom.xml)中Jetty插件的端口，访问地址的配置文件为：[`service-config.properties`](./json-rpc/src/main/resources/service-config.properties)。
 
 ### REST-RPC
 
